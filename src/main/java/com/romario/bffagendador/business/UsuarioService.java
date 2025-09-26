@@ -1,12 +1,14 @@
 package com.romario.bffagendador.business;
 
 
-import com.romario.bffagendador.business.dto.EnderecoDTO;
-import com.romario.bffagendador.business.dto.TelefoneDTO;
-import com.romario.bffagendador.business.dto.UsuarioDTO;
+import com.romario.bffagendador.business.dto.in.EnderecoInDTO;
+import com.romario.bffagendador.business.dto.in.LoginDTO;
+import com.romario.bffagendador.business.dto.in.TelefoneInDTO;
+import com.romario.bffagendador.business.dto.out.EnderecoDTO;
+import com.romario.bffagendador.business.dto.out.TelefoneDTO;
+import com.romario.bffagendador.business.dto.out.UsuarioDTO;
 import com.romario.bffagendador.infrastructure.client.UsuarioClient;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +18,7 @@ public class UsuarioService {
     private final UsuarioClient usuarioClient;
 
 
-    public String loginUsuario(UsuarioDTO dto){
+    public String loginUsuario(LoginDTO dto){
         return usuarioClient.login(dto);
     }
 
@@ -41,19 +43,19 @@ public class UsuarioService {
 
     }
 
-    public EnderecoDTO atualizaEndereco(Long id, EnderecoDTO dto, String token){
+    public EnderecoDTO atualizaEndereco(Long id, EnderecoInDTO dto, String token){
         return usuarioClient.atualizaEndereco(dto,id,token);
     }
 
-    public TelefoneDTO atualizaTelefone(Long id, TelefoneDTO dto, String token){
+    public TelefoneDTO atualizaTelefone(Long id, TelefoneInDTO dto, String token){
         return usuarioClient.atualizaTelefone(dto, id, token);
     }
 
-    public EnderecoDTO cadastraEndereco(String token, EnderecoDTO dto){
+    public EnderecoDTO cadastraEndereco(String token, EnderecoInDTO dto){
         return usuarioClient.cadastraEndereco(dto, token);
     }
 
-    public TelefoneDTO cadastraTelefone(String token, TelefoneDTO dto){
+    public TelefoneDTO cadastraTelefone(String token, TelefoneInDTO dto){
         return usuarioClient.cadastraTelefone(dto, token);
     }
 }

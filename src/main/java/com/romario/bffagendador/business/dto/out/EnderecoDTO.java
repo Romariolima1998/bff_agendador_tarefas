@@ -1,4 +1,4 @@
-package com.romario.bffagendador.business.dto;
+package com.romario.bffagendador.business.dto.out;
 
 import lombok.*;
 

@@ -1,11 +1,13 @@
 package com.romario.bffagendador.infrastructure.client;
 
 
-import com.romario.bffagendador.business.dto.EnderecoDTO;
-import com.romario.bffagendador.business.dto.TelefoneDTO;
-import com.romario.bffagendador.business.dto.UsuarioDTO;
+import com.romario.bffagendador.business.dto.in.EnderecoInDTO;
+import com.romario.bffagendador.business.dto.in.LoginDTO;
+import com.romario.bffagendador.business.dto.in.TelefoneInDTO;
+import com.romario.bffagendador.business.dto.out.EnderecoDTO;
+import com.romario.bffagendador.business.dto.out.TelefoneDTO;
+import com.romario.bffagendador.business.dto.out.UsuarioDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "usuario", url = "${usuario.url}")
@@ -18,7 +20,7 @@ public interface UsuarioClient {
     UsuarioDTO salvaUsuario(@RequestBody UsuarioDTO usuarioDTO);
 
     @PostMapping("/login")
-    String login(@RequestBody UsuarioDTO usuarioDTO);
+    String login(@RequestBody LoginDTO usuarioDTO);
 
 
     @DeleteMapping("/{email}")
@@ -33,26 +35,26 @@ public interface UsuarioClient {
 
     @PutMapping("/endereco")
     EnderecoDTO atualizaEndereco(
-            @RequestBody EnderecoDTO dto, @RequestParam("id") Long id,
+            @RequestBody EnderecoInDTO dto, @RequestParam("id") Long id,
             @RequestHeader("Authorization") String token
     );
 
     @PutMapping("/telefone")
     TelefoneDTO atualizaTelefone(
-            @RequestBody TelefoneDTO dto,
+            @RequestBody TelefoneInDTO dto,
             @RequestParam("id") Long id,
             @RequestHeader("Authorization") String token
     );
 
     @PostMapping("/endereco")
     EnderecoDTO cadastraEndereco(
-            @RequestBody EnderecoDTO dto, @RequestHeader("Authorization") String token
+            @RequestBody EnderecoInDTO dto, @RequestHeader("Authorization") String token
     );
 
 
     @PostMapping("/telefone")
     TelefoneDTO cadastraTelefone(
-            @RequestBody TelefoneDTO dto, @RequestHeader("Authorization") String token
+            @RequestBody TelefoneInDTO dto, @RequestHeader("Authorization") String token
     );
 
 }

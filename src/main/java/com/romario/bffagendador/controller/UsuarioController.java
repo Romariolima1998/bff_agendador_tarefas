@@ -2,12 +2,14 @@ package com.romario.bffagendador.controller;
 
 
 import com.romario.bffagendador.business.UsuarioService;
+import com.romario.bffagendador.business.ViaCepService;
 import com.romario.bffagendador.business.dto.in.EnderecoInDTO;
 import com.romario.bffagendador.business.dto.in.LoginDTO;
 import com.romario.bffagendador.business.dto.in.TelefoneInDTO;
 import com.romario.bffagendador.business.dto.out.EnderecoDTO;
 import com.romario.bffagendador.business.dto.out.TelefoneDTO;
 import com.romario.bffagendador.business.dto.out.UsuarioDTO;
+import com.romario.bffagendador.business.dto.out.ViaCepDTO;
 import com.romario.bffagendador.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,6 +27,16 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name= SecurityConfig.SECURITY_SCHEME)
 public class UsuarioController {
     private final UsuarioService usuarioService;
+    private final ViaCepService viaCepService;
+
+
+    @GetMapping("/endereco/{cep}")
+    @Operation(summary = "busca endereco pelo cep", description = "busca endereco pelo cep")
+    @ApiResponse(responseCode = "200", description = "endereco encontrado com sucesso")
+    @ApiResponse(responseCode = "400", description = "cep incorreto")
+    public ResponseEntity<ViaCepDTO> buscarDadosCep(@PathVariable("cep") String cep){
+        return ResponseEntity.ok(viaCepService.buscaDadosEndereco(cep));
+    }
 
 
     @PostMapping

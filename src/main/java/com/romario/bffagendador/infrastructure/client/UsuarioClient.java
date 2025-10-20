@@ -7,11 +7,17 @@ import com.romario.bffagendador.business.dto.in.TelefoneInDTO;
 import com.romario.bffagendador.business.dto.out.EnderecoDTO;
 import com.romario.bffagendador.business.dto.out.TelefoneDTO;
 import com.romario.bffagendador.business.dto.out.UsuarioDTO;
+import com.romario.bffagendador.business.dto.out.ViaCepDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "usuario", url = "${usuario.url}")
 public interface UsuarioClient {
+
+
+    @GetMapping("/endereco/{cep}")
+    ViaCepDTO buscarDadosCep(@PathVariable("cep") String cep);
+
     @GetMapping
     UsuarioDTO buscaUsuarioPorEmail(@RequestParam("email") String email,
                                     @RequestHeader("Authorization") String token);

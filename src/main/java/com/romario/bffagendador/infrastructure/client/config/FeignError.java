@@ -25,7 +25,7 @@ public class FeignError implements ErrorDecoder {
             case 401:
                 return new UnaltorizedException("erro: " + messageError);
             case 400:
-                return new IllegalArgumentException("erro: " + messageError)
+                return new IllegalArgumentException("erro: " + messageError);
             default:
                 return new BusinessException("erro: " + messageError);
         }
@@ -36,9 +36,11 @@ public class FeignError implements ErrorDecoder {
             if(Objects.isNull(response.body())){
                 return "";
             }
-            String messageError = new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8);
+            String messageErro = new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8);
+            return messageErro;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 }

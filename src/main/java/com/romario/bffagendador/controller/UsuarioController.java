@@ -2,7 +2,6 @@ package com.romario.bffagendador.controller;
 
 
 import com.romario.bffagendador.business.UsuarioService;
-import com.romario.bffagendador.business.ViaCepService;
 import com.romario.bffagendador.business.dto.in.EnderecoInDTO;
 import com.romario.bffagendador.business.dto.in.LoginDTO;
 import com.romario.bffagendador.business.dto.in.TelefoneInDTO;
@@ -27,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name= SecurityConfig.SECURITY_SCHEME)
 public class UsuarioController {
     private final UsuarioService usuarioService;
-    private final ViaCepService viaCepService;
+
 
 
     @GetMapping("/endereco/{cep}")
@@ -35,7 +34,7 @@ public class UsuarioController {
     @ApiResponse(responseCode = "200", description = "endereco encontrado com sucesso")
     @ApiResponse(responseCode = "400", description = "cep incorreto")
     public ResponseEntity<ViaCepDTO> buscarDadosCep(@PathVariable("cep") String cep){
-        return ResponseEntity.ok(viaCepService.buscaDadosEndereco(cep));
+        return ResponseEntity.ok(usuarioService.buscaDadosEndereco(cep));
     }
 
 

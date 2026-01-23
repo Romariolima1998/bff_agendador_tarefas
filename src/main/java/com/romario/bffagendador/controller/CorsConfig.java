@@ -14,10 +14,13 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")       // todas as rotas
-                        .allowedOrigins("*")     // ou lista de domínios permitidos
-                        .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
-                        .allowedHeaders("*");
+                registry.addMapping("/**")
+                        // Use allowedOriginPatterns em vez de allowedOrigins
+                        .allowedOriginPatterns("http://127.0.0.1:8083", "http://localhost:8083")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true)
+                        .maxAge(3600); // Dica: ajuda o navegador a "lembrar" da permissão
             }
         };
     }

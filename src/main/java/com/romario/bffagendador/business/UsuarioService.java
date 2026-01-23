@@ -7,6 +7,7 @@ import com.romario.bffagendador.business.dto.in.TelefoneInDTO;
 import com.romario.bffagendador.business.dto.out.EnderecoDTO;
 import com.romario.bffagendador.business.dto.out.TelefoneDTO;
 import com.romario.bffagendador.business.dto.out.UsuarioDTO;
+import com.romario.bffagendador.business.dto.out.ViaCepDTO;
 import com.romario.bffagendador.infrastructure.client.UsuarioClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,10 @@ public class UsuarioService {
 
     private final UsuarioClient usuarioClient;
 
+
+    public ViaCepDTO buscaDadosEndereco(String cep){
+        return usuarioClient.buscarDadosCep(cep);
+    }
 
     public String loginUsuario(LoginDTO dto){
         return usuarioClient.login(dto);
